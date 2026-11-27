@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#FAF6F0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="살림연구소">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <title>살림연구소 비서실 · 박준 대표님</title>
 <style>
   :root{
@@ -65,6 +69,23 @@
     font-variant-numeric:tabular-nums;
   }
   .stamp i{width:6px; height:6px; border-radius:50%; background:#C08A5A; display:block;}
+  .hdr-row{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin-top:9px;}
+  .hdr-row .stamp{margin-top:0;}
+  .refresh-btn{
+    appearance:none; -webkit-appearance:none; cursor:pointer; font-family:inherit;
+    display:inline-flex; align-items:center; gap:5px; white-space:nowrap;
+    padding:5px 12px 5px 9px; border-radius:999px;
+    background:linear-gradient(180deg,#FFFDFA,#F6ECDE);
+    border:1px solid #E4D2BA; color:var(--brown);
+    font-size:11.5px; font-weight:800; letter-spacing:-0.02em;
+    box-shadow:0 1px 3px rgba(38,33,29,.07);
+    transition:transform .12s ease, background .16s ease, box-shadow .16s ease;
+  }
+  .refresh-btn .ric{font-size:12px; line-height:1; display:inline-block;}
+  .refresh-btn:active{transform:scale(.96); background:var(--brown-soft);}
+  .refresh-btn[data-loading="true"]{color:#8F3F05; background:var(--brown-soft);}
+  .refresh-btn[data-loading="true"] .ric{animation:spin .9s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
 
   /* ── tabs ── */
   nav.tabs{
@@ -321,7 +342,10 @@
         <div class="brand-sub">박준 대표님 전용 현황판</div>
       </div>
     </div>
-    <div class="stamp"><i></i>기준: 2026-11-27 15:20 업데이트</div>
+    <div class="hdr-row">
+      <div class="stamp"><i></i>기준: 2026-11-27 15:40 업데이트</div>
+      <button class="refresh-btn" id="refreshBtn" type="button" aria-label="최신 버전으로 새로고침"><span class="ric">🔄</span>새로고침</button>
+    </div>
   </div>
 </header>
 
@@ -625,7 +649,7 @@
   </section>
 
   <p class="foot">
-    기준: <b>2026-11-27 15:20 업데이트</b><br>
+    기준: <b>2026-11-27 15:40 업데이트</b><br>
     저장된 기록 기준 현황판입니다. 예정 일정은 실제 진행에 따라 달라질 수 있습니다.
   </p>
 </div>
@@ -642,6 +666,27 @@
   window.addEventListener('resize', syncHdr);
   window.addEventListener('orientationchange', syncHdr);
   window.setTimeout(syncHdr, 300);
+
+  /* ── 새로고침: iOS 홈 화면 앱·Safari 캐시를 뚫고 최신 index.html 다시 받기 ── */
+  var refreshBtn = document.getElementById('refreshBtn');
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', function () {
+      refreshBtn.setAttribute('data-loading', 'true');
+      var next = window.location.pathname + '?t=' + Date.now() + (window.location.hash || '');
+      window.location.replace(next);
+    });
+  }
+  // 새로고침이 붙인 ?t=... 는 주소창에 남기지 않는다
+  (function stripReloadStamp() {
+    try {
+      if (!window.history || !window.history.replaceState) return;
+      var u = new URL(window.location.href);
+      if (!u.searchParams.has('t')) return;
+      u.searchParams.delete('t');
+      var qs = u.searchParams.toString();
+      window.history.replaceState(null, '', u.pathname + (qs ? '?' + qs : '') + u.hash);
+    } catch (e) {}
+  })();
 
   var tabs = Array.prototype.slice.call(document.querySelectorAll('nav.tabs button[role="tab"]'));
   var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
