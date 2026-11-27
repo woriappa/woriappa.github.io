@@ -131,6 +131,7 @@
     color:var(--ink-3); text-transform:uppercase; margin:20px 2px 8px;
   }
   .section-label::after{content:""; flex:1; height:1px; background:var(--line);}
+  .section-label em{font-style:normal; font-weight:700; letter-spacing:-0.01em; text-transform:none; font-size:10.5px;}
 
   /* ── hero ── */
   .hero{
@@ -240,11 +241,32 @@
   }
   .stat .k{font-size:10.5px; color:var(--ink-3); font-weight:700; letter-spacing:-0.01em;}
   .stat .v{
-    font-size:23px; font-weight:800; color:var(--brown); line-height:1.2;
+    font-size:22px; font-weight:800; color:var(--brown); line-height:1.2;
     font-variant-numeric:tabular-nums; letter-spacing:-0.03em; margin-top:2px;
   }
-  .stat .v small{font-size:12px; font-weight:700; color:var(--ink-2); margin-left:1px;}
+  .stat .v small{font-size:11.5px; font-weight:700; color:var(--ink-2); margin-left:1px;}
+  .stat .v.dim{color:var(--ink-3); font-size:15px; letter-spacing:-0.01em;}
   .stat .n{font-size:10px; color:var(--ink-3); font-weight:600; margin-top:1px;}
+
+  /* ── bar chart ── */
+  .chart{display:flex; align-items:flex-end; gap:9px; height:132px; padding:4px 1px 0;}
+  .cbar{flex:1; min-width:0; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:5px;}
+  .cbar .cv{font-size:11px; font-weight:800; color:var(--brown); font-variant-numeric:tabular-nums; letter-spacing:-0.02em;}
+  .cbar .ctrack{width:100%; flex:1; display:flex; align-items:flex-end;}
+  .cbar .cfill{
+    width:100%; border-radius:8px 8px 5px 5px;
+    background:linear-gradient(180deg,#E8A25C,#B45309); min-height:5px;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.35);
+  }
+  .cbar.today .cfill{background:linear-gradient(180deg,#C9C0B4,#9A8D81);}
+  .cbar .cd{font-size:10px; color:var(--ink-3); font-weight:700; white-space:nowrap;}
+  .chart-foot{
+    display:flex; justify-content:space-between; gap:8px; align-items:baseline;
+    margin-top:10px; padding-top:9px; border-top:1px dashed #EFE6DA;
+    font-size:11px; color:var(--ink-2); font-weight:700;
+  }
+  .chart-foot b{color:var(--brown); font-variant-numeric:tabular-nums;}
+  .hint{font-size:10.5px; color:var(--ink-3); font-weight:600; margin:8px 0 0; line-height:1.5;}
 
   /* ── rows ── */
   .row{
@@ -260,6 +282,8 @@
   .row-body{flex:1; min-width:0;}
   .row-t{font-size:13.5px; font-weight:700; letter-spacing:-0.02em;}
   .row-d{font-size:12px; color:var(--ink-2); line-height:1.5; margin-top:1px;}
+  .row-v{flex:0 0 auto; font-size:14px; font-weight:800; color:var(--brown); font-variant-numeric:tabular-nums; letter-spacing:-0.03em; padding-top:1px;}
+  .row-v small{font-size:10px; color:var(--ink-3); font-weight:700; margin-left:1px;}
   .pill{
     flex:0 0 auto; font-size:10px; font-weight:800; padding:3px 8px; border-radius:999px;
     white-space:nowrap; margin-top:2px; letter-spacing:-0.01em;
@@ -268,28 +292,32 @@
   .pill.wait{background:#F4EFE8; color:#8A7A68;}
   .pill.done{background:#EAF3EA; color:var(--green);}
   .pill.soon{background:var(--brown-soft); color:var(--brown);}
+  .pill.none{background:#F4EFE8; color:#8A7A68;}
+
+  /* ── post list ── */
+  .pl{display:flex; gap:9px; align-items:center; padding:10px 0; border-top:1px dashed #EFE6DA;}
+  .pl:first-child{border-top:0; padding-top:2px;}
+  .pl .no{
+    flex:0 0 21px; height:21px; border-radius:7px; background:var(--cream-2);
+    color:var(--ink-2); font-size:10.5px; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+    font-variant-numeric:tabular-nums;
+  }
+  .pl.top .no{background:var(--brown-soft); color:var(--brown);}
+  .pl .pt{flex:1; min-width:0; font-size:13px; font-weight:700; letter-spacing:-0.02em; line-height:1.42; overflow-wrap:anywhere;}
+  .pl .pt span{display:block; font-size:10.5px; color:var(--ink-3); font-weight:600; margin-top:1px; letter-spacing:-0.01em;}
+  .pl .pv{
+    flex:0 0 auto; font-size:13.5px; font-weight:800; color:var(--brown);
+    font-variant-numeric:tabular-nums; letter-spacing:-0.03em;
+  }
+  .pl .pv small{font-size:9.5px; color:var(--ink-3); font-weight:700; margin-left:1px;}
+  .pl .pv.zero{color:var(--ink-3);}
 
   /* ── progress ── */
   .prog{margin-top:2px;}
   .prog-top{display:flex; justify-content:space-between; font-size:11px; font-weight:700; color:var(--ink-2); margin-bottom:6px;}
   .prog-bar{height:8px; border-radius:999px; background:var(--cream-2); overflow:hidden;}
   .prog-fill{height:100%; width:20%; border-radius:999px; background:linear-gradient(90deg,#D9812F,#B45309);}
-
-  /* ── schedule ── */
-  .time-row{display:flex; gap:11px; align-items:flex-start; padding:10px 0; border-top:1px dashed #EFE6DA;}
-  .time-row:first-of-type{border-top:0; padding-top:2px;}
-  .time{
-    flex:0 0 46px; font-size:13px; font-weight:800; color:var(--brown);
-    font-variant-numeric:tabular-nums; letter-spacing:-0.02em; padding-top:1px;
-  }
-  .time-body{flex:1; min-width:0;}
-  .time-t{font-size:13.5px; font-weight:700; letter-spacing:-0.02em;}
-  .time-d{font-size:11.5px; color:var(--ink-2); margin-top:2px;}
-  .num{
-    display:inline-block; font-size:10px; font-weight:800; color:var(--ink-2);
-    background:var(--cream-2); border-radius:5px; padding:1px 5px; margin-right:4px;
-    font-variant-numeric:tabular-nums; vertical-align:1px;
-  }
 
   /* ── links ── */
   .links{display:grid; gap:8px; margin-top:4px;}
@@ -330,6 +358,8 @@
     line-height:1.7; font-weight:600;
   }
   .foot b{color:var(--ink-2); font-weight:700;}
+  .foot .src{text-align:left; padding:0 2px;}
+  .foot .src p{margin:3px 0; font-size:10.5px; line-height:1.55;}
 </style>
 </head>
 <body>
@@ -343,7 +373,7 @@
       </div>
     </div>
     <div class="hdr-row">
-      <div class="stamp"><i></i>기준: 2026-11-27 15:40 업데이트</div>
+      <div class="stamp"><i></i>기준: 2026-11-27 15:55 업데이트</div>
       <button class="refresh-btn" id="refreshBtn" type="button" aria-label="최신 버전으로 새로고침"><span class="ric">🔄</span>새로고침</button>
     </div>
   </div>
@@ -386,11 +416,11 @@
             <div class="speech-role">pa62742 · 홈판·애드포스트 담당</div>
           </div>
         </div>
-        <p>오늘 방문자 186명 왔습니다. 홈판이랑 애드포스트에 집중하는 중이고, 쿠칭 4편이랑 초빈집 글감은 아직 발행 전으로 대기하고 있어요.</p>
+        <p>오늘 조회수 302, 어제 방문자 331명입니다. 애드포스트 어제 수익은 373원, 쌓인 잔액은 12만 4,256원이에요. 최근 글은 축제·드라이브 코스가 반응 좋고, 주간 최다 글은 내장산 설경 후기 394회입니다.</p>
         <div class="mini">
-          <div><div class="mk">방문자</div><div class="mv">186명</div></div>
-          <div><div class="mk">쿠칭</div><div class="mv">4편</div></div>
-          <div><div class="mk">초빈집</div><div class="mv">대기</div></div>
+          <div><div class="mk">오늘 조회</div><div class="mv">302</div></div>
+          <div><div class="mk">어제 방문</div><div class="mv">331</div></div>
+          <div><div class="mk">애드포스트</div><div class="mv">124,256원</div></div>
         </div>
         <div class="speech-actions">
           <button class="mini-btn solid goto" data-goto="ch1">상세 카드 보기</button>
@@ -405,11 +435,11 @@
             <div class="speech-role">woriappa · 살림·가전 담당</div>
           </div>
         </div>
-        <p>공개 38편, 예약 20편(11/29~12/17), 임시저장 9개입니다. 첫 판매 1건 나왔고, 크림 에디토리얼 썸네일은 4편 교체 완료, 16편 남았습니다.</p>
+        <p>오늘 조회수 51, 어제 방문자 92명입니다. 브랜드커넥트는 클릭 56회에 판매 1건(13만 2천원), 예상 수익 2,376원이 잡혔어요. 공개 글은 38편입니다.</p>
         <div class="mini">
-          <div><div class="mk">공개</div><div class="mv">38편</div></div>
-          <div><div class="mk">예약</div><div class="mv">20편</div></div>
-          <div><div class="mk">임시저장</div><div class="mv">9개</div></div>
+          <div><div class="mk">오늘 조회</div><div class="mv">51</div></div>
+          <div><div class="mk">어제 방문</div><div class="mv">92</div></div>
+          <div><div class="mk">예상 수익</div><div class="mv">2,376원</div></div>
         </div>
         <div class="speech-actions">
           <button class="mini-btn solid goto" data-goto="ch3">상세 카드 보기</button>
@@ -424,11 +454,11 @@
             <div class="speech-role">게시물 45 · 팔로워 29</div>
           </div>
         </div>
-        <p>19:30에 [32] 무타공 무선 센서등(쿠파스) 업로드 예정이고, 20:00에 [13] 저녁 성과 보고 예정입니다. 프로필 바이오 3줄 개편은 끝났어요.</p>
+        <p>게시물 45개, 팔로워 29명입니다. 30일 조회수 66, 조회한 사람 12명, 반응 51이에요. 릴스는 100회 넘게 본 편도 있는데 피드 슬라이드는 아직 한 자릿수입니다.</p>
         <div class="mini">
-          <div><div class="mk">게시물</div><div class="mv">45개</div></div>
-          <div><div class="mk">팔로워</div><div class="mv">29명</div></div>
-          <div><div class="mk">다음</div><div class="mv">19:30</div></div>
+          <div><div class="mk">게시물</div><div class="mv">45</div></div>
+          <div><div class="mk">팔로워</div><div class="mv">29</div></div>
+          <div><div class="mk">30일 조회</div><div class="mv">66</div></div>
         </div>
         <div class="speech-actions">
           <button class="mini-btn solid goto" data-goto="insta">상세 카드 보기</button>
@@ -480,49 +510,147 @@
       <div>
         <div class="ch-name">1호기 · 우리아빠</div>
         <div class="ch-id">pa62742 · blog.naver.com/pa62742</div>
-        <span class="ch-tag">홈판 · 애드포스트 집중</span>
+        <span class="ch-tag">홈판 · 애드포스트</span>
       </div>
     </div>
 
-    <div class="stats one">
+    <div class="stats">
       <div class="stat">
-        <div class="k">오늘 방문자</div>
-        <div class="v">186<small>명</small></div>
-        <div class="n">2026-11-27 기준</div>
+        <div class="k">오늘 조회수</div>
+        <div class="v">302</div>
+        <div class="n">15:50 실시간</div>
+      </div>
+      <div class="stat">
+        <div class="k">어제 방문자</div>
+        <div class="v">331<small>명</small></div>
+        <div class="n">11/26 순방문</div>
+      </div>
+      <div class="stat">
+        <div class="k">어제 수익</div>
+        <div class="v">373<small>원</small></div>
+        <div class="n">애드포스트</div>
       </div>
     </div>
 
-    <div class="section-label">진행 상태</div>
+    <div class="section-label">최근 5일 방문자 <em>순방문자 기준</em></div>
+    <div class="card">
+      <div class="chart">
+        <div class="cbar"><span class="cv">734</span><div class="ctrack"><div class="cfill" style="height:100%"></div></div><span class="cd">11/22</span></div>
+        <div class="cbar"><span class="cv">503</span><div class="ctrack"><div class="cfill" style="height:69%"></div></div><span class="cd">11/23</span></div>
+        <div class="cbar"><span class="cv">401</span><div class="ctrack"><div class="cfill" style="height:55%"></div></div><span class="cd">11/24</span></div>
+        <div class="cbar"><span class="cv">303</span><div class="ctrack"><div class="cfill" style="height:41%"></div></div><span class="cd">11/25</span></div>
+        <div class="cbar"><span class="cv">331</span><div class="ctrack"><div class="cfill" style="height:45%"></div></div><span class="cd">11/26</span></div>
+      </div>
+      <div class="chart-foot">
+        <span>5일 평균 <b>454명</b></span>
+        <span>주말 700대 → 평일 300~500</span>
+      </div>
+      <p class="hint">네이버 통계의 순방문자는 전일까지만 확정 제공 → 오늘 값은 미확인(실시간 조회수로 대체)</p>
+    </div>
+
+    <div class="section-label">수익 · 애드포스트</div>
     <div class="card">
       <div class="row">
-        <div class="row-ic">🏠</div>
+        <div class="row-ic">📅</div>
         <div class="row-body">
-          <div class="row-t">홈판·애드포스트 집중</div>
-          <div class="row-d">본 블로그 수익 라인 우선 운영</div>
+          <div class="row-t">전날(11/26) 수익</div>
+          <div class="row-d">11/25 3,593원 → 11/26 373원</div>
         </div>
-        <span class="pill now">진행</span>
+        <div class="row-v">373<small>원</small></div>
       </div>
       <div class="row">
-        <div class="row-ic">🧳</div>
+        <div class="row-ic">🏦</div>
         <div class="row-body">
-          <div class="row-t">쿠칭 여행기 4편</div>
-          <div class="row-d">원고·발행 대기</div>
+          <div class="row-t">지급 가능 잔액</div>
+          <div class="row-d">전환 가능 금액 · 최근 지급 0원</div>
         </div>
-        <span class="pill wait">대기</span>
+        <div class="row-v">124,256<small>원</small></div>
       </div>
       <div class="row">
-        <div class="row-ic">🌱</div>
+        <div class="row-ic">📈</div>
         <div class="row-body">
-          <div class="row-t">초빈집 글감</div>
-          <div class="row-d">선점 후보 확보 · 집필 전</div>
+          <div class="row-t">최근 7일 수익 합계</div>
+          <div class="row-d">11/20~11/26 · 1,136 / 835 / 1,305 / 2,108 / 2,042 / 3,593 / 373</div>
         </div>
-        <span class="pill wait">대기</span>
+        <div class="row-v">11,392<small>원</small></div>
       </div>
+      <div class="row">
+        <div class="row-ic">🎯</div>
+        <div class="row-body">
+          <div class="row-t">누적 총 수익</div>
+          <div class="row-d">화면에 총액 표기 없음(지급 이력 필요)</div>
+        </div>
+        <span class="pill none">미확인</span>
+      </div>
+    </div>
+
+    <div class="section-label">최신 글 5 <em>누적 조회수</em></div>
+    <div class="card">
+      <div class="pl">
+        <span class="no">1</span>
+        <span class="pt">12월 5일 고창 미리크리스마스 축제 일정 공연 마켓 사전접수 맛집 총정리<span>11/27 12:00 · 공감 12 · 댓글 0</span></span>
+        <span class="pv">5<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">2</span>
+        <span class="pt">전남 곡성 구례 겨울 드라이브 코스 국도 17호선 섬진강 가볼만한곳 6곳<span>11/27 07:00 · 공감 9 · 댓글 2</span></span>
+        <span class="pv">2<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">3</span>
+        <span class="pt">수원역 제주고기 맛집 제주도새기<span>11/26 21:10 · 공감 21 · 댓글 3</span></span>
+        <span class="pv">5<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">4</span>
+        <span class="pt">진안 마이산 암마이봉 정상길 막혔다. 통제 이유는?<span>11/26 09:58 · 공감 18 · 댓글 0</span></span>
+        <span class="pv">9<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">5</span>
+        <span class="pt">비엔나 12월 날씨 영하 1도, 크리스마스 마켓 다닐 때 체감은 더 춥습니다<span>11/26 07:30 · 공감 16 · 댓글 1</span></span>
+        <span class="pv">2<small>회</small></span>
+      </div>
+      <p class="hint">최신 글은 올린 지 하루 이틀이라 조회수보다 공감(9~21)이 먼저 붙는 중입니다.</p>
+    </div>
+
+    <div class="section-label">최다 조회수 5 <em>11/16~11/22 주간</em></div>
+    <div class="card">
+      <div class="pl top">
+        <span class="no">1</span>
+        <span class="pt">정읍 내장산 설경 후기</span>
+        <span class="pv">394<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">2</span>
+        <span class="pt">진안 마이산 탑사·은수사 역고드름</span>
+        <span class="pv">392<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">3</span>
+        <span class="pt">2026 함양 창녕 고속도로</span>
+        <span class="pv">378<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">4</span>
+        <span class="pt">당진~청주고속도로</span>
+        <span class="pv">305<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">5</span>
+        <span class="pt">2026 화순 미리미리 크리스마스 축제 취소</span>
+        <span class="pv">188<small>회</small></span>
+      </div>
+      <p class="hint">오늘(11/27) 조회수 1위는 함양~창녕 고속도로 91회, 그다음 당진~청주 29회 · 2027년 1월 국내여행 20회</p>
     </div>
 
     <div class="links">
       <a class="btn" href="https://blog.naver.com/pa62742" target="_blank" rel="noopener">
         <span>1호기 블로그 열기<span class="url" style="display:block;">blog.naver.com/pa62742</span></span>
+        <span class="arw">↗</span>
+      </a>
+      <a class="btn ghost" href="https://adpost.naver.com/main" target="_blank" rel="noopener">
+        <span>애드포스트 수입 보기<span class="url" style="display:block;">adpost.naver.com</span></span>
         <span class="arw">↗</span>
       </a>
     </div>
@@ -541,46 +669,157 @@
 
     <div class="stats">
       <div class="stat">
-        <div class="k">공개</div>
+        <div class="k">오늘 조회수</div>
+        <div class="v">51</div>
+        <div class="n">15:41 실시간</div>
+      </div>
+      <div class="stat">
+        <div class="k">어제 방문자</div>
+        <div class="v">92<small>명</small></div>
+        <div class="n">11/26 순방문</div>
+      </div>
+      <div class="stat">
+        <div class="k">공개 글</div>
         <div class="v">38<small>편</small></div>
-      </div>
-      <div class="stat">
-        <div class="k">예약</div>
-        <div class="v">20<small>편</small></div>
-        <div class="n">11/29~12/17</div>
-      </div>
-      <div class="stat">
-        <div class="k">임시저장</div>
-        <div class="v">9<small>개</small></div>
+        <div class="n">전체보기 기준</div>
       </div>
     </div>
 
-    <div class="section-label">성과</div>
+    <div class="section-label">최근 5일 방문자 <em>순방문자 기준</em></div>
+    <div class="card">
+      <div class="chart">
+        <div class="cbar"><span class="cv">111</span><div class="ctrack"><div class="cfill" style="height:78%"></div></div><span class="cd">11/22</span></div>
+        <div class="cbar"><span class="cv">110</span><div class="ctrack"><div class="cfill" style="height:77%"></div></div><span class="cd">11/23</span></div>
+        <div class="cbar"><span class="cv">122</span><div class="ctrack"><div class="cfill" style="height:86%"></div></div><span class="cd">11/24</span></div>
+        <div class="cbar"><span class="cv">142</span><div class="ctrack"><div class="cfill" style="height:100%"></div></div><span class="cd">11/25</span></div>
+        <div class="cbar"><span class="cv">92</span><div class="ctrack"><div class="cfill" style="height:65%"></div></div><span class="cd">11/26</span></div>
+      </div>
+      <div class="chart-foot">
+        <span>5일 평균 <b>115명</b></span>
+        <span>11/25 정점 142명</span>
+      </div>
+      <p class="hint">네이버 통계의 순방문자는 전일까지만 확정 제공 → 오늘 값은 미확인(실시간 조회수로 대체)</p>
+    </div>
+
+    <div class="section-label">수익 · 브랜드커넥트 <em>11/26 집계</em></div>
     <div class="card">
       <div class="row">
         <div class="row-ic">🛒</div>
         <div class="row-body">
-          <div class="row-t">첫 판매 1건 달성</div>
-          <div class="row-d">쇼핑커넥트 경유 첫 결제 발생</div>
+          <div class="row-t">판매 1건 · 132,000원</div>
+          <div class="row-d">엘레나 질유산균 180캡슐 (유한양행)</div>
         </div>
-        <span class="pill done">달성</span>
+        <span class="pill done">발생</span>
+      </div>
+      <div class="row">
+        <div class="row-ic">💰</div>
+        <div class="row-body">
+          <div class="row-t">예상 수익</div>
+          <div class="row-d">판매 금액의 약 1.8%</div>
+        </div>
+        <div class="row-v">2,376<small>원</small></div>
+      </div>
+      <div class="row">
+        <div class="row-ic">👆</div>
+        <div class="row-body">
+          <div class="row-t">클릭 수 56회 · 주문 0건</div>
+          <div class="row-d">전환율 0% (구매는 링크 밖에서 이뤄짐)</div>
+        </div>
+        <span class="pill wait">전환 0</span>
+      </div>
+      <div class="row">
+        <div class="row-ic">📦</div>
+        <div class="row-body">
+          <div class="row-t">전체 누적 (2025-01-01~)</div>
+          <div class="row-d">최근 30일과 동일 · 클릭 56 / 판매 1 / 수익 2,376원</div>
+        </div>
+        <span class="pill now">동일</span>
       </div>
     </div>
 
-    <div class="section-label">썸네일 교체</div>
+    <div class="section-label">최신 글 5 <em>누적 조회수</em></div>
     <div class="card">
-      <div class="prog">
-        <div class="prog-top">
-          <span>크림 에디토리얼 · 1차 4편 완료</span>
-          <span>4 / 20편</span>
-        </div>
-        <div class="prog-bar"><div class="prog-fill"></div></div>
+      <div class="pl">
+        <span class="no">1</span>
+        <span class="pt">한일 식기건조기 4인용 스텐 UV, 물때와 물기 냄새 없이 주방 정리하는 기준<span>11/27 08:00</span></span>
+        <span class="pv">1<small>회</small></span>
       </div>
-      <div class="row" style="border-top:1px solid #EFE6DA; margin-top:12px; padding-top:12px;">
+      <div class="pl">
+        <span class="no">2</span>
+        <span class="pt">넥워머 소재 차이｜폴라플리스와 메리노울, 땀이 차는 쪽은<span>11/26 21:40</span></span>
+        <span class="pv">2<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">3</span>
+        <span class="pt">한일의료기 탄소매트 퀸더블｜150×200 크기와 전체난방, 37℃ 기준<span>11/26 13:50</span></span>
+        <span class="pv">3<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">4</span>
+        <span class="pt">인바디 체중계 앱 연동｜전극 4개와 8개 차이, 측정 항목 비교<span>11/26 12:40</span></span>
+        <span class="pv">4<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">5</span>
+        <span class="pt">홈파티 퐁듀 세트 치즈·초코 겸용｜워머·전기식·인덕션 고르는 기준<span>11/26 10:40</span></span>
+        <span class="pv">4<small>회</small></span>
+      </div>
+      <p class="hint">최신 5편 모두 공감 0 · 댓글 0 — 검색 유입 전 단계입니다.</p>
+    </div>
+
+    <div class="section-label">최다 조회수 5 <em>11/16~11/22 주간</em></div>
+    <div class="card">
+      <div class="pl top">
+        <span class="no">1</span>
+        <span class="pt">아파트 창문 외풍·우풍 완벽 차단 가이드</span>
+        <span class="pv">59<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">2</span>
+        <span class="pt">차량용 점프스타터 추천</span>
+        <span class="pv">28<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">3</span>
+        <span class="pt">수도 동파방지 열선 설치 방법</span>
+        <span class="pv">24<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">4</span>
+        <span class="pt">실내 방한 난방텐트</span>
+        <span class="pv">19<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">5</span>
+        <span class="pt">단열 뽁뽁이 추천</span>
+        <span class="pv">18<small>회</small></span>
+      </div>
+      <p class="hint">어제(11/26) 조회수 1위는 겨울 등산 양말 15회, 2027 다이어리 10회, 노스필 기름통 8회</p>
+    </div>
+
+    <div class="section-label">발행 현황</div>
+    <div class="card">
+      <div class="row">
+        <div class="row-ic">📚</div>
+        <div class="row-body">
+          <div class="row-t">공개 38편</div>
+          <div class="row-d">전체보기 기준 실측</div>
+        </div>
+        <span class="pill now">공개</span>
+      </div>
+      <div class="row">
+        <div class="row-ic">🗓️</div>
+        <div class="row-body">
+          <div class="row-t">예약 20편 · 임시저장 9개</div>
+          <div class="row-d">11/29~12/17 예약분 · 15:20 집계</div>
+        </div>
+        <span class="pill wait">대기</span>
+      </div>
+      <div class="row">
         <div class="row-ic">🖼️</div>
         <div class="row-body">
-          <div class="row-t">남은 16편 교체</div>
-          <div class="row-d">1차 4편 적용 완료 · 나머지 순차 진행</div>
+          <div class="row-t">크림 에디토리얼 썸네일 4 / 20편</div>
+          <div class="row-d">16편 남음</div>
         </div>
         <span class="pill soon">진행</span>
       </div>
@@ -589,6 +828,10 @@
     <div class="links">
       <a class="btn" href="https://blog.naver.com/woriappa" target="_blank" rel="noopener">
         <span>3호기 블로그 열기<span class="url" style="display:block;">blog.naver.com/woriappa</span></span>
+        <span class="arw">↗</span>
+      </a>
+      <a class="btn ghost" href="https://brandconnect.naver.com/1019324785498048/affiliate/sales-dashboard" target="_blank" rel="noopener">
+        <span>브랜드커넥트 판매 실적<span class="url" style="display:block;">brandconnect.naver.com</span></span>
         <span class="arw">↗</span>
       </a>
     </div>
@@ -601,11 +844,11 @@
       <div>
         <div class="ch-name">인스타 · woriappa_review</div>
         <div class="ch-id">@woriappa_review · 릴스/피드</div>
-        <span class="ch-tag">프로필 바이오 3줄 개편 완료</span>
+        <span class="ch-tag">30일 인사이트</span>
       </div>
     </div>
 
-    <div class="stats two">
+    <div class="stats">
       <div class="stat">
         <div class="k">게시물</div>
         <div class="v">45<small>개</small></div>
@@ -614,25 +857,134 @@
         <div class="k">팔로워</div>
         <div class="v">29<small>명</small></div>
       </div>
+      <div class="stat">
+        <div class="k">30일 조회수</div>
+        <div class="v">66</div>
+        <div class="n">조회한 사람 12</div>
+      </div>
     </div>
 
-    <div class="section-label">오늘 일정</div>
+    <div class="section-label">계정 인사이트 <em>최근 30일</em></div>
     <div class="card">
-      <div class="time-row">
-        <div class="time">19:30</div>
-        <div class="time-body">
-          <div class="time-t"><span class="num">[32]</span>무타공 무선 센서등 업로드</div>
-          <div class="time-d">쿠파스 소싱 · 예정</div>
+      <div class="row">
+        <div class="row-ic">👀</div>
+        <div class="row-body">
+          <div class="row-t">조회수 66 · 조회한 사람 12</div>
+          <div class="row-d">팔로워 43.9% / 비팔로워 56.1%</div>
         </div>
-        <span class="pill soon">예정</span>
+        <div class="row-v">66</div>
       </div>
-      <div class="time-row">
-        <div class="time">20:00</div>
-        <div class="time-body">
-          <div class="time-t"><span class="num">[13]</span>저녁 성과 보고</div>
-          <div class="time-d">노출·유입 지표 정리 보고 예정</div>
+      <div class="row">
+        <div class="row-ic">💬</div>
+        <div class="row-body">
+          <div class="row-t">반응 51 · 참여한 계정 1</div>
+          <div class="row-d">릴스 조회 100회 · 게시물 80.4% / 릴스 19.6%</div>
         </div>
-        <span class="pill soon">예정</span>
+        <div class="row-v">51</div>
+      </div>
+      <div class="row">
+        <div class="row-ic">🔗</div>
+        <div class="row-body">
+          <div class="row-t">프로필 활동 17</div>
+          <div class="row-d">프로필 방문 16 · 외부 링크 누름 1</div>
+        </div>
+        <div class="row-v">17</div>
+      </div>
+      <div class="row">
+        <div class="row-ic">❤️</div>
+        <div class="row-body">
+          <div class="row-t">총 좋아요 · 총 댓글 합계</div>
+          <div class="row-d">앱이 계정 단위 합계를 제공하지 않음 (1위 릴스: 좋아요 0 · 댓글 1)</div>
+        </div>
+        <span class="pill none">미확인</span>
+      </div>
+    </div>
+
+    <div class="section-label">최근 5개 <em>조회수</em></div>
+    <div class="card">
+      <div class="pl">
+        <span class="no">1</span>
+        <span class="pt">그릴 릴스 · 사기 전 이 3가지 안 보면 후회합니다<span>11/26 · 릴스</span></span>
+        <span class="pv">2<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">2</span>
+        <span class="pt">그릴 슬라이드 · 집에서 고기 굽는다면 사기 전 이 3가지<span>11/26 · 캐러셀</span></span>
+        <span class="pv">2<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">3</span>
+        <span class="pt">전기매트 릴스 · 탄소매트 사기 전 이 3가지<span>11/26 · 릴스</span></span>
+        <span class="pv">1<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">4</span>
+        <span class="pt">전기매트 슬라이드 · 이거 모르고 사면 겨울 내내 후회<span>11/26 · 캐러셀</span></span>
+        <span class="pv zero">0<small>회</small></span>
+      </div>
+      <div class="pl">
+        <span class="no">5</span>
+        <span class="pt">캠핑 난로 릴스 · 난로를 켜도 발끝은 안 따뜻합니다<span>11/25 · 릴스</span></span>
+        <span class="pv">114<small>회</small></span>
+      </div>
+      <p class="hint">11/26 올린 4개는 아직 0~2회. 하루 지나면 릴스가 100회대로 붙는 패턴입니다.</p>
+    </div>
+
+    <div class="section-label">최다 조회수 5 <em>30일 · 모두 11/25 릴스</em></div>
+    <div class="card">
+      <div class="pl top">
+        <span class="no">1</span>
+        <span class="pt">캠핑 난로 · 「난로를 켜도, 발끝은 안 따뜻합니다」</span>
+        <span class="pv">114<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">2</span>
+        <span class="pt">차량 김서림 방지제 · 「비 오는 날에도 뽀얗게 사라지지 스프레이」</span>
+        <span class="pv">114<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">3</span>
+        <span class="pt">세탁기 동파 보온재 · 「작년에 호스 얼었다면, 이번엔 8천원」</span>
+        <span class="pv">109<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">4</span>
+        <span class="pt">가습기 · 「아직 피부가 푹 꺼졌다면? 가습기부터 바꾸세요」</span>
+        <span class="pv">108<small>회</small></span>
+      </div>
+      <div class="pl top">
+        <span class="no">5</span>
+        <span class="pt">온열찜질기 · 「겨울 때마다 찌릿하다면」</span>
+        <span class="pv">106<small>회</small></span>
+      </div>
+      <p class="hint">그다음 순위: 기름통 106 · 미니온풍기 106 · 점프스타터 46 · 오방난로 31</p>
+    </div>
+
+    <div class="section-label">수익</div>
+    <div class="card">
+      <div class="row">
+        <div class="row-ic">🟠</div>
+        <div class="row-body">
+          <div class="row-t">쿠팡 파트너스</div>
+          <div class="row-d">클릭 0 · 구매 0 · 수익 0원 (일별·이번 달 모두) · 11/27 업데이트</div>
+        </div>
+        <div class="row-v">0<small>원</small></div>
+      </div>
+      <div class="row">
+        <div class="row-ic">🏷️</div>
+        <div class="row-body">
+          <div class="row-t">브랜드커넥트 인스타 몫</div>
+          <div class="row-d">계정 단위 집계라 채널 구분 없음 → 3호기 탭의 2,376원이 블로그+인스타 통합</div>
+        </div>
+        <span class="pill none">구분 불가</span>
+      </div>
+      <div class="row">
+        <div class="row-ic">🧾</div>
+        <div class="row-body">
+          <div class="row-t">쿠팡 상세 리포트·정산</div>
+          <div class="row-d">본인인증(MFA) 요구로 열람 불가</div>
+        </div>
+        <span class="pill none">미확인</span>
       </div>
     </div>
 
@@ -645,13 +997,22 @@
         <span>링크 모음 열기<span class="url" style="display:block;">link.inpock.co.kr/woriappa_review</span></span>
         <span class="arw">↗</span>
       </a>
+      <a class="btn ghost" href="https://partners.coupang.com/" target="_blank" rel="noopener">
+        <span>쿠팡 파트너스 열기<span class="url" style="display:block;">partners.coupang.com</span></span>
+        <span class="arw">↗</span>
+      </a>
     </div>
   </section>
 
-  <p class="foot">
-    기준: <b>2026-11-27 15:40 업데이트</b><br>
-    저장된 기록 기준 현황판입니다. 예정 일정은 실제 진행에 따라 달라질 수 있습니다.
-  </p>
+  <div class="foot">
+    기준: <b>2026-11-27 15:55 업데이트</b>
+    <div class="src">
+      <p>· 방문자·조회수: 네이버 블로그 통계(admin.blog.naver.com) 실측. 순방문자는 전일까지 확정 집계라 오늘 값은 실시간 조회수로 표기.</p>
+      <p>· 최다 조회수: 네이버 통계가 제공하는 최근 완료 주간(11/16~11/22) 조회수 순위. 3호기 최신 글은 글별 누적 조회수 페이지 실측.</p>
+      <p>· 수익: 애드포스트 수입 현황(11/20~11/26), 브랜드커넥트 판매 실적(11/26 집계), 쿠팡 파트너스 일별·월간 실적(11/27).</p>
+      <p>· 인스타: 프로페셔널 대시보드 30일 인사이트. 계정 단위 좋아요·댓글 합계는 앱에 없어 미확인.</p>
+    </div>
+  </div>
 </div>
 
 <script>
